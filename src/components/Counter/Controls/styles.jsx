@@ -31,7 +31,7 @@ export const Button = styled.button`
 	:hover {
 		&.danger {
 			background-color: ${COLORS.red};
-			color: ${COLORS.text};
+			color: ${COLORS.white};
 			border-color: ${COLORS.primary};
 		}
 		background-color: ${COLORS.secondary};

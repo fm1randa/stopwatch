@@ -6,10 +6,12 @@ export const Container = styled.div`
 	width: 100%;
 	justify-content: space-between;
 	column-gap: 10px;
-	color: ${COLORS.text};
+	color: ${COLORS.white};
 `;
 
-export const LapId = styled.span``;
+export const LapId = styled.span`
+	font-style: italic;
+`;
 
 export const StartEnd = styled.div``;
 
