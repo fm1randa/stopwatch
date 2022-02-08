@@ -1,22 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { Clock, Container } from "./styles";
+import React, { useState } from "react";
+import { Box, Clock, Container } from "./styles";
 import Controls from "./Controls";
-import { format } from "date-fns";
+import Lap from "../../Lap";
+import Laps from "./Laps";
+import getFormattedTimer from "../../helpers/getMinutesAndSecs";
 
 const Index = () => {
 	const [buttonText, setButtonText] = useState("start");
 	const [count, setCount] = useState(0);
 	const [isCounting, setIsCounting] = useState(false);
+	const [intervalId, setIntervalId] = useState(null);
+	const [laps, setLaps] = useState([]);
 
 	const toggleCounting = () => {
-		console.log(isCounting);
 		toggleButtonText();
-		if (isCounting) {
-			stopCounting();
-		} else {
+		if (!isCounting) {
 			startCounting();
+		} else {
+			stopCounting();
 		}
 		setIsCounting(!isCounting);
+	};
+
+	const resetCount = () => {
+		setCount(0);
+		setLaps([]);
+	};
+
+	const createLap = () => {
+		const newLaps = laps.slice();
+		const lastEndTime = getLastEndTime(newLaps);
+		const newIndex = newLaps.length;
+		const lap = new Lap(newIndex, {
+			startTime: lastEndTime,
+			endTime: count,
+		});
+		newLaps.push(lap);
+		setLaps(newLaps);
 	};
 
 	const toggleButtonText = () => {
@@ -27,28 +47,36 @@ const Index = () => {
 		}
 	};
 
-	let interval;
 	const startCounting = () => {
-		interval = setInterval(() => increaseCount(count), 1000);
+		setIntervalId(setInterval(increaseCount, 1));
 	};
 
 	const stopCounting = () => {
-		clearInterval(interval);
+		clearInterval(intervalId);
 	};
 
 	const increaseCount = () => {
-		const newCount = count + 1;
-		setCount(newCount);
+		setCount((oldCount) => oldCount + 4); // Interval has a 4ms delay
 	};
 
-	useEffect(() => {
-		console.log(count);
-	}, [count]);
+	function getLastEndTime(laps) {
+		const lastLap = laps[laps.length - 1];
+		return lastLap ? lastLap.endTime : 0;
+	}
 
 	return (
 		<Container>
-			<Clock> {`${format(new Date(count), "mm:ss")}`} </Clock>
-			<Controls toggleCounting={toggleCounting} buttonText={buttonText} />
+			<Box>
+				<Clock> {`${getFormattedTimer(count, { showMs: true })}`} </Clock>
+				<Controls
+					toggleCounting={toggleCounting}
+					buttonText={buttonText}
+					resetCount={resetCount}
+					createLap={createLap}
+					isCounting={isCounting}
+				/>
+				<Laps laps={laps} />
+			</Box>
 		</Container>
 	);
 };

@@ -1,12 +1,22 @@
 import React from "react";
 import { Button, Container } from "./styles";
 
-const Index = ({ toggleCounting, buttonText }) => {
+const Index = ({
+	toggleCounting,
+	buttonText,
+	resetCount,
+	createLap,
+	isCounting,
+}) => {
 	return (
 		<Container>
-			<Button className="danger"> reset </Button>
-			<Button> lap </Button>
-			<Button onClick={toggleCounting}> {buttonText} </Button>
+			<Button onClick={resetCount} className="danger">
+				reset
+			</Button>
+			<Button onClick={createLap}> lap </Button>
+			<Button onClick={toggleCounting} className={isCounting && "active"}>
+				{buttonText}
+			</Button>
 		</Container>
 	);
 };

@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const Button = styled.button`
-	width: 100px;
+	width: 95px;
 	height: 40px;
 	border-radius: 5px;
 	border: 1px solid ${COLORS.secondary};
@@ -16,6 +16,15 @@ export const Button = styled.button`
 
 	color: ${COLORS.secondary};
 	transition: all 0.2s ease-in-out;
+
+	&.active {
+		background-color: ${COLORS.secondary};
+		color: ${COLORS.primary};
+
+		:hover {
+			opacity: 0.5;
+		}
+	}
 
 	:hover {
 		&.danger {
