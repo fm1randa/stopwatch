@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Box, Clock, Container } from "./styles";
+import { Box, Container } from "./styles";
 import Controls from "./Controls";
 import Lap from "../../Lap";
 import Laps from "./Laps";
-import getFormattedTimer from "../../helpers/getFormattedTimer";
+import Clock from "./Clock";
 
 const Index = () => {
 	const [buttonText, setButtonText] = useState("start");
@@ -67,7 +67,7 @@ const Index = () => {
 	return (
 		<Container>
 			<Box>
-				<Clock> {`${getFormattedTimer(count, { showMs: true })}`} </Clock>
+				<Clock count={count} />
 				<Controls
 					toggleCounting={toggleCounting}
 					buttonText={buttonText}

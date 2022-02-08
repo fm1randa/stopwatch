@@ -18,11 +18,13 @@ export const Button = styled.button`
 	transition: all 0.2s ease-in-out;
 
 	&.active {
-		background-color: ${COLORS.secondary};
+		border-color: #f5ed00;
+		background-color: #f5ed00;
 		color: ${COLORS.primary};
 
 		:hover {
-			opacity: 0.5;
+			background-color: #b8b100;
+			border-color: #b8b100;
 		}
 	}
 
