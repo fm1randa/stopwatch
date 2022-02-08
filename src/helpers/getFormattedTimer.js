@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 
 export default function getFormattedTimer(
-	timeInMs,
+	timeInMs = 0,
 	options = { showMs: false }
 ) {
 	const formatString = options.showMs ? "mm:ss,SS" : "mm:ss";

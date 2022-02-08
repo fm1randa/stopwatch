@@ -3,7 +3,7 @@ import { Box, Clock, Container } from "./styles";
 import Controls from "./Controls";
 import Lap from "../../Lap";
 import Laps from "./Laps";
-import getFormattedTimer from "../../helpers/getMinutesAndSecs";
+import getFormattedTimer from "../../helpers/getFormattedTimer";
 
 const Index = () => {
 	const [buttonText, setButtonText] = useState("start");
