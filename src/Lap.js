@@ -3,5 +3,6 @@ export default class Lap {
 		this.index = lapNumber;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.duration = endTime - startTime;
 	}
 }
