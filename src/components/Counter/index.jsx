@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Box, Clock, Container } from "./styles";
+import { Box, Container } from "./styles";
 import Controls from "./Controls";
 import Lap from "../../Lap";
 import Laps from "./Laps";
-import getFormattedTimer from "../../helpers/getFormattedTimer";
+import Clock from "./Clock";
 
 const Index = () => {
 	const [buttonText, setButtonText] = useState("start");
@@ -35,7 +35,7 @@ const Index = () => {
 			startTime: lastEndTime,
 			endTime: count,
 		});
-		newLaps.push(lap);
+		newLaps.unshift(lap);
 		setLaps(newLaps);
 	};
 
@@ -60,14 +60,14 @@ const Index = () => {
 	};
 
 	function getLastEndTime(laps) {
-		const lastLap = laps[laps.length - 1];
+		const lastLap = laps[0];
 		return lastLap ? lastLap.endTime : 0;
 	}
 
 	return (
 		<Container>
 			<Box>
-				<Clock> {`${getFormattedTimer(count, { showMs: true })}`} </Clock>
+				<Clock count={count} />
 				<Controls
 					toggleCounting={toggleCounting}
 					buttonText={buttonText}
