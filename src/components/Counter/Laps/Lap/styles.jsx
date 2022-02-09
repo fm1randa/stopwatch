@@ -7,6 +7,13 @@ export const Container = styled.div`
 	justify-content: space-between;
 	column-gap: 10px;
 	color: ${COLORS.white};
+
+	&.shorter {
+		color: ${COLORS.green};
+	}
+	&.longer {
+		color: ${COLORS.red};
+	}
 `;
 
 export const LapId = styled.span`

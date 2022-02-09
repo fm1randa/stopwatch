@@ -2,12 +2,11 @@ import React from "react";
 import { Container, LapId, Start, End, Duration, StartEnd } from "./styles";
 import getFormattedTimer from "../../../../helpers/getFormattedTimer";
 
-const Index = ({ index, start, end, duration }) => {
+const Index = ({ index, start, end, duration, ...rest }) => {
 	return (
-		<Container>
+		<Container {...rest}>
 			<LapId>#{index + 1}</LapId>
 			<StartEnd>
-				<Start>{getFormattedTimer(start, { showMs: true })}</Start> -{" "}
 				<End>{getFormattedTimer(end, { showMs: true })}</End>
 			</StartEnd>
 			<Duration>{getFormattedTimer(duration, { showMs: true })}</Duration>
