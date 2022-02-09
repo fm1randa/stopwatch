@@ -35,7 +35,7 @@ const Index = () => {
 			startTime: lastEndTime,
 			endTime: count,
 		});
-		newLaps.push(lap);
+		newLaps.unshift(lap);
 		setLaps(newLaps);
 	};
 
@@ -60,7 +60,7 @@ const Index = () => {
 	};
 
 	function getLastEndTime(laps) {
-		const lastLap = laps[laps.length - 1];
+		const lastLap = laps[0];
 		return lastLap ? lastLap.endTime : 0;
 	}
 
