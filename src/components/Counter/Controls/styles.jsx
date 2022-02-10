@@ -41,6 +41,12 @@ export const Button = styled.button`
 		transform: scale(0.95);
 		background-color: ${COLORS.secondary};
 		color: ${COLORS.primary};
+
+		&.danger {
+			background-color: ${COLORS.red};
+			color: ${COLORS.white};
+			border-color: ${COLORS.primary};
+		}
 	}
 
 	:hover {

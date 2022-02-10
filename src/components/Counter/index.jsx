@@ -8,6 +8,7 @@ import Clock from "./Clock";
 const Index = () => {
 	const [buttonText, setButtonText] = useState("start");
 	const [count, setCount] = useState(0);
+	const [countHelper, setCountHelper] = useState(0);
 	const [isCounting, setIsCounting] = useState(false);
 	const [intervalId, setIntervalId] = useState(null);
 	const [laps, setLaps] = useState([]);
@@ -26,7 +27,9 @@ const Index = () => {
 	};
 
 	const resetCount = () => {
+		if (isCounting) toggleCounting();
 		setCount(0);
+		setCountHelper(0);
 		setLaps([]);
 	};
 
@@ -51,15 +54,19 @@ const Index = () => {
 	};
 
 	const startCounting = () => {
-		setIntervalId(setInterval(increaseCount, 1));
+		const baseDate = new Date();
+		setIntervalId(setInterval(() => increaseCount(baseDate), 1));
 	};
 
 	const stopCounting = () => {
+		setCountHelper(count);
 		clearInterval(intervalId);
 	};
 
-	const increaseCount = () => {
-		setCount((oldCount) => oldCount + 4); // Interval has a 4ms limit
+	const increaseCount = (baseDate) => {
+		const currentDate = new Date();
+		const timeElapsed = currentDate.getTime() - baseDate.getTime();
+		setCount(countHelper + timeElapsed);
 	};
 
 	const getLastEndTime = (laps) => {
