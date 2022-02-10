@@ -7,14 +7,23 @@ const Index = ({
 	resetCount,
 	createLap,
 	isCounting,
+	lapButtonRef,
+	resetButtonRef,
+	toggleCountButtonRef,
 }) => {
 	return (
 		<Container>
-			<Button onClick={resetCount} className="danger">
+			<Button onClick={resetCount} className="danger" ref={resetButtonRef}>
 				reset
 			</Button>
-			<Button onClick={createLap}> lap </Button>
-			<Button onClick={toggleCounting} className={isCounting && "active"}>
+			<Button onClick={createLap} ref={lapButtonRef}>
+				lap
+			</Button>
+			<Button
+				onClick={toggleCounting}
+				className={isCounting && "active"}
+				ref={toggleCountButtonRef}
+			>
 				{buttonText}
 			</Button>
 		</Container>

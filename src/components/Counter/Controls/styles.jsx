@@ -13,6 +13,7 @@ export const Button = styled.button`
 	border: 1px solid ${COLORS.secondary};
 	background-color: transparent;
 	cursor: pointer;
+	outline: none;
 
 	color: ${COLORS.secondary};
 	transition: all 0.2s ease-in-out;
@@ -26,6 +27,20 @@ export const Button = styled.button`
 			background-color: #b8b100;
 			border-color: #b8b100;
 		}
+	}
+
+	:active {
+		transition: 0s;
+		transform: scale(0.95);
+		background-color: ${COLORS.secondary};
+		color: ${COLORS.primary};
+	}
+
+	&.pressed {
+		transition: 0s;
+		transform: scale(0.95);
+		background-color: ${COLORS.secondary};
+		color: ${COLORS.primary};
 	}
 
 	:hover {

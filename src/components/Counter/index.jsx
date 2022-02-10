@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box, Container } from "./styles";
 import Controls from "./Controls";
 import Lap from "../../Lap";
@@ -11,6 +11,9 @@ const Index = () => {
 	const [isCounting, setIsCounting] = useState(false);
 	const [intervalId, setIntervalId] = useState(null);
 	const [laps, setLaps] = useState([]);
+	const toggleCountButtonRef = useRef(null);
+	const lapButtonRef = useRef(null);
+	const resetButtonRef = useRef(null);
 
 	const toggleCounting = () => {
 		toggleButtonText();
@@ -56,16 +59,70 @@ const Index = () => {
 	};
 
 	const increaseCount = () => {
-		setCount((oldCount) => oldCount + 4); // Interval has a 4ms delay
+		setCount((oldCount) => oldCount + 4); // Interval has a 4ms limit
 	};
 
-	function getLastEndTime(laps) {
+	const getLastEndTime = (laps) => {
 		const lastLap = laps[0];
 		return lastLap ? lastLap.endTime : 0;
-	}
+	};
+
+	const handleKeyEvent = (event) => {
+		event.preventDefault();
+		switch (event.key) {
+			case " ":
+				pressButton(event, toggleCountButtonRef);
+				break;
+			case "Enter":
+				pressButton(event, lapButtonRef);
+				break;
+			case "Escape":
+				pressButton(event, resetButtonRef);
+				break;
+			default:
+				break;
+		}
+	};
+	const pressButton = (event, buttonRef) => {
+		clickOnKeyDown(event, buttonRef);
+		togglePressedClass(event, buttonRef);
+	};
+
+	const togglePressedClass = (event, buttonRef) => {
+		if (event.type === "keydown") {
+			buttonRef.current.classList.add("pressed");
+		} else if (event.type === "keyup") {
+			buttonRef.current.classList.remove("pressed");
+		}
+	};
+
+	const clickOnKeyDown = (event, buttonRef) => {
+		if (event.type === "keydown") {
+			buttonRef.current.click();
+		}
+	};
+
+	const useEventListener = (eventName, handler, element = window) => {
+		const savedHandler = useRef();
+
+		useEffect(() => {
+			savedHandler.current = handler;
+		}, [handler]);
+
+		useEffect(() => {
+			const eventListener = (event) => savedHandler.current(event);
+			element.addEventListener(eventName, eventListener);
+			return () => {
+				element.removeEventListener(eventName, eventListener);
+			};
+		}, [eventName, element]);
+	};
+
+	useEventListener("keydown", handleKeyEvent);
+	useEventListener("keyup", handleKeyEvent);
 
 	return (
-		<Container>
+		<Container /* onKeyDown={handleKeyDown} */>
 			<Box>
 				<Clock count={count} />
 				<Controls
@@ -74,6 +131,9 @@ const Index = () => {
 					resetCount={resetCount}
 					createLap={createLap}
 					isCounting={isCounting}
+					lapButtonRef={lapButtonRef}
+					resetButtonRef={resetButtonRef}
+					toggleCountButtonRef={toggleCountButtonRef}
 				/>
 				<Laps laps={laps} />
 			</Box>
