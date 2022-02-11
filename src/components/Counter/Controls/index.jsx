@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container } from "./styles";
+import { Button, Container, Key } from "./styles";
 
 const Index = ({
 	toggleCounting,
@@ -7,15 +7,27 @@ const Index = ({
 	resetCount,
 	createLap,
 	isCounting,
+	lapButtonRef,
+	resetButtonRef,
+	toggleCountButtonRef,
 }) => {
 	return (
 		<Container>
-			<Button onClick={resetCount} className="danger">
+			<Button onClick={resetCount} className="danger" ref={resetButtonRef}>
 				reset
+				<Key> esc </Key>
 			</Button>
-			<Button onClick={createLap}> lap </Button>
-			<Button onClick={toggleCounting} className={isCounting && "active"}>
+			<Button onClick={createLap} ref={lapButtonRef} disabled={!isCounting}>
+				lap
+				<Key> enter </Key>
+			</Button>
+			<Button
+				onClick={toggleCounting}
+				className={isCounting && "active"}
+				ref={toggleCountButtonRef}
+			>
 				{buttonText}
+				<Key> space </Key>
 			</Button>
 		</Container>
 	);

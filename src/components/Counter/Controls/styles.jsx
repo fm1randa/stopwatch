@@ -13,6 +13,8 @@ export const Button = styled.button`
 	border: 1px solid ${COLORS.secondary};
 	background-color: transparent;
 	cursor: pointer;
+	outline: none;
+	position: relative;
 
 	color: ${COLORS.secondary};
 	transition: all 0.2s ease-in-out;
@@ -28,6 +30,26 @@ export const Button = styled.button`
 		}
 	}
 
+	:active {
+		transition: 0s;
+		transform: scale(0.95);
+		background-color: ${COLORS.secondary};
+		color: ${COLORS.primary};
+	}
+
+	&.pressed {
+		transition: 0s;
+		transform: scale(0.95);
+		background-color: ${COLORS.secondary};
+		color: ${COLORS.primary};
+
+		&.danger {
+			background-color: ${COLORS.red};
+			color: ${COLORS.white};
+			border-color: ${COLORS.primary};
+		}
+	}
+
 	:hover {
 		&.danger {
 			background-color: ${COLORS.red};
@@ -37,4 +59,15 @@ export const Button = styled.button`
 		background-color: ${COLORS.secondary};
 		color: ${COLORS.primary};
 	}
+`;
+
+export const Key = styled.kbd`
+	color: ${COLORS.white};
+	opacity: 0.6;
+	position: absolute;
+	bottom: -20px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	pointer-events: none;
+	font-size: 10px;
 `;
