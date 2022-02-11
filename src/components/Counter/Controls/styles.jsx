@@ -14,6 +14,7 @@ export const Button = styled.button`
 	background-color: transparent;
 	cursor: pointer;
 	outline: none;
+	position: relative;
 
 	color: ${COLORS.secondary};
 	transition: all 0.2s ease-in-out;
@@ -58,4 +59,15 @@ export const Button = styled.button`
 		background-color: ${COLORS.secondary};
 		color: ${COLORS.primary};
 	}
+`;
+
+export const Key = styled.kbd`
+	color: ${COLORS.white};
+	opacity: 0.6;
+	position: absolute;
+	bottom: -20px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	pointer-events: none;
+	font-size: 10px;
 `;

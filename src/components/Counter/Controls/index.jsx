@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container } from "./styles";
+import { Button, Container, Key } from "./styles";
 
 const Index = ({
 	toggleCounting,
@@ -15,9 +15,11 @@ const Index = ({
 		<Container>
 			<Button onClick={resetCount} className="danger" ref={resetButtonRef}>
 				reset
+				<Key> esc </Key>
 			</Button>
 			<Button onClick={createLap} ref={lapButtonRef}>
 				lap
+				<Key> enter </Key>
 			</Button>
 			<Button
 				onClick={toggleCounting}
@@ -25,6 +27,7 @@ const Index = ({
 				ref={toggleCountButtonRef}
 			>
 				{buttonText}
+				<Key> space </Key>
 			</Button>
 		</Container>
 	);
