@@ -29,8 +29,9 @@ export const BackgroundCircle = styled.div`
 
 export const Time = styled.span`
 	position: absolute;
-	top: 38%;
-	left: 15%;
+	top: 40%;
+	left: 20%;
 	font-size: 60px;
-	color: ${COLORS.secondary};
+	color: ${COLORS.white};
+	font-family: "Ticking Timebomb BB Regular";
 `;

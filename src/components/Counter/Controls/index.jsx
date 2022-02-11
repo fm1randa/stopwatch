@@ -17,7 +17,7 @@ const Index = ({
 				reset
 				<Key> esc </Key>
 			</Button>
-			<Button onClick={createLap} ref={lapButtonRef}>
+			<Button onClick={createLap} ref={lapButtonRef} disabled={!isCounting}>
 				lap
 				<Key> enter </Key>
 			</Button>
